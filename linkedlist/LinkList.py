@@ -6,21 +6,31 @@ class LinkList(object):
         self.__head = ListNode(None)
 
     def get_head(self):
-        return self.head
+        return self.__head
 
     def set_head(self, node):
         self.__head = node
 
     def get_tail(self):
-        tail = self.__get_head__()
+        tail = self.get_head()
         while tail.next:
             tail = tail.next
         return tail
+
+    def append(self, val):
+        tail = self.get_tail()
+        node = ListNode(val)
+        tail.next = node
+        node.next = None
 
     def add(self, node):
         tail = self.get_tail()
         tail.next = node
         node.next = None
+
+    def from_list(self, vallist):
+        for val in vallist:
+            self.append(val)
 
     def get_node(self, val):
         node = self.get_head()
@@ -77,4 +87,10 @@ class LinkList(object):
             else:
                 node_pre.next = node.next
 
-
+    def __str__(self):
+        node = self.get_head().next
+        lis = []
+        while node:
+            lis.append(str(node.val))
+            node = node.next
+        return " ".join(lis)
